@@ -1,0 +1,11 @@
+{
+    "name": "vendor/combo-associate",
+    "description": "Description of project comboAssociate.",
+    "authors": [
+        {
+            "name": "slowhand",
+            "email": "your@email.here"
+        }
+    ],
+    "require": {}
+}
