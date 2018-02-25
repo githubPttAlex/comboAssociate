@@ -1,10 +1,10 @@
 {
     "name": "vendor/combo-associate",
-    "description": "Description of project comboAssociate.",
+    "description": "comboAssociate - jQuery Plugin: This plugin is useful when you need to manage single or multiple select HTML tags on your projects. See docs for more information.",
     "authors": [
         {
-            "name": "slowhand",
-            "email": "your@email.here"
+            "name": "githubPttAlex",
+            "email": "alejandrodai2@gmail.com"
         }
     ],
     "require": {}
