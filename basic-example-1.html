@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta name="description" content="Basic Example - comboAssociate - jQuery Plugin">
-            <meta name="author" content="comboAssociate - jQuery Plugin">
-            <title>Basic Example - comboAssociate - jQuery Plugin</title>
-            <!-- Bootstrap core CSS -->
-            <link href="resources/bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
-            <!-- Custom styles for this template -->
-            <link href="resources/bootstrap-4.0.0/docs/4.0/examples/album/album.css" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Basic Example - comboAssociate - jQuery Plugin">
+        <meta name="author" content="comboAssociate - jQuery Plugin">
+        <title>Basic Example - comboAssociate - jQuery Plugin</title>
+        <!-- Bootstrap core CSS -->
+        <link href="resources/bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="resources/bootstrap-4.0.0/docs/4.0/examples/album/album.css" rel="stylesheet">
     </head>
     <body>
         <header>
@@ -40,134 +40,128 @@
                   </div>
             </div>
         </header>
-            <main role="main">
-              <section class="jumbotron text-center">
-                    <div class="container">
-                      <h1 class="jumbotron-heading">comboAssociate - jQuery Plugin <br/>Basic Example 1</h1>
-                      <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+        <main role="main">
+            <section class="jumbotron text-center">
+                  <div class="container">
+                    <h1 class="jumbotron-heading">comboAssociate - jQuery Plugin <br/>Basic Example 1</h1>
+                    <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+                  </div>
+            </section>
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form>
+
+                              <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                      <label for="selectCombo1">Soccer Teams</label>
+                                      <select id="selectCombo1" class="form-control">
+                                            <option value="" selected>Choose...</option>
+                                            <option value="1">FC. Barcelona</option>
+                                            <option value="2">Real Madrid</option>
+                                            <option value="3">Atlético Madrid</option>
+                                            <option value="4">Betis</option>
+                                            <option value="5">Villareal</option>
+                                            <option value="6">Real Sociedad</option>
+                                      </select>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                      <label for="selectCombo2">Players</label>
+                                      <select id="selectCombo2" class="form-control">
+                                      </select>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                      <label for="selectCombo3">Championships</label>
+                                      <select id="selectCombo3" class="form-control">
+                                      </select>
+                                    </div>
+                              </div> 
+                              <button id="exampleSubmitButton" type="button" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>	
                     </div>
-              </section>
-              <div class="album py-5 bg-light">
-                    <div class="container">
-                            <div class="row">
-                                    <div class="col-md-12">
-                                            <form>
-
-                                              <div class="form-row">
-
-                                                    <div class="form-group col-md-12">
-                                                      <label for="selectCombo1">Soccer Teams</label>
-                                                      <select id="selectCombo1" class="form-control">
-                                                            <option value="" selected>Choose...</option>
-                                                            <option value="1">FC. Barcelona</option>
-                                                            <option value="2">Real Madrid</option>
-                                                            <option value="3">Atlético Madrid</option>
-                                                            <option value="4">Betis</option>
-                                                            <option value="5">Villareal</option>
-                                                            <option value="6">Real Sociedad</option>
-                                                      </select>
-                                                    </div>
-
-                                                    <div class="form-group col-md-6">
-                                                      <label for="selectCombo2">Players</label>
-                                                      <select id="selectCombo2" class="form-control">
-                                                            <option value="-1" selected>Choose...</option>
-                                                            <option value="1">FC. Barcelona</option>
-                                                            <option value="2">Real Madrid</option>
-                                                            <option value="3">Atlético Madrid</option>
-                                                            <option value="4">Betis</option>
-                                                            <option value="5">Villareal</option>
-                                                            <option value="6">Real Sociedad</option>
-                                                      </select>
-                                                    </div>
-
-                                                    <div class="form-group col-md-6">
-                                                      <label for="selectCombo3">Championships</label>
-                                                      <select id="selectCombo3" class="form-control">
-                                                            <option value="Choose..." selected>Choose...</option>
-                                                            <option value="1">FC. Barcelona</option>
-                                                            <option value="2">Real Madrid</option>
-                                                            <option value="3">Atlético Madrid</option>
-                                                            <option value="4">Betis</option>
-                                                            <option value="5">Villareal</option>
-                                                            <option value="6">Real Sociedad</option>
-                                                      </select>
-                                                    </div>
-
-                                              </div> 
-                                              <button id="exampleSubmitButton" type="button" class="btn btn-primary">Submit</button>
-                                            </form>
-                                    </div>	
-                            </div>
-                    </div>
-              </div>
-            </main>
-            <footer class="text-muted">
-              <div class="container">
-                    <p class="float-right">
-                      <a href="#">Back to top</a>
-                    </p>
-                    <p>comboAssociate - jQuery Plugin</p>
-                    <p>The plugin needs jQuery to work. Visit jQuery website - <a target="_blank" href="https://jquery.com/">jQuery</a>.</p>
-                    <p>The plugin doesnt needs bootstrap to work. We only use Bootstrap (version 4.0.0) for docs and examples - <a target="_blank" href="https://getbootstrap.com/">Visit Bootstrap website</a> .</p>
-              </div>
-            </footer>
-            <!-- Bootstrap core JavaScript
-            ================================================== -->
-            <!-- Placed at the end of the document so the pages load faster -->
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-            <script>window.jQuery || document.write('<script src="resources/bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-            <script src="resources/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
-            <script src="resources/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
-            <script src="resources/bootstrap-4.0.0/assets/js/vendor/holder.min.js"></script>
-            <!-- including comboAssociate - jQuery Plugin -->
-            <script src="resources/js/jquery-comboAssociate-v1-0.js"></script>
-            <!-- using comboAssociate - jQuery Plugin -->
-            <script>	
-                $(document).ready(function(){
-                    /* Assign a function for submit button - (doesn't needed for plugin to work) */
-                    $("#exampleSubmitButton").on('click', function(){
-                        alert('Sorry....this is your work....enjoy it!!!');
-                    });
+                </div>
+            </div>
+        </main>
+        <footer class="text-muted">
+          <div class="container">
+                <p class="float-right">
+                  <a href="#">Back to top</a>
+                </p>
+                <p>comboAssociate - jQuery Plugin</p>
+                <p>The plugin needs jQuery to work. Visit jQuery website - <a target="_blank" href="https://jquery.com/">jQuery</a>.</p>
+                <p>The plugin doesnt needs bootstrap to work. We only use Bootstrap (version 4.0.0) for docs and examples - <a target="_blank" href="https://getbootstrap.com/">Visit Bootstrap website</a> .</p>
+          </div>
+        </footer>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->  
+        <script src="resources/js/jquery-3.3.1.min.js"></script>
+        <script>window.jQuery || document.write('<script src="resources/bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+        <script src="resources/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
+        <script src="resources/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="resources/bootstrap-4.0.0/assets/js/vendor/holder.min.js"></script>
+        <!-- including comboAssociate - jQuery Plugin -->
+        <script src="resources/js/jquery-comboAssociate-v1-0.js"></script>
+        <!-- using comboAssociate - jQuery Plugin -->
+        <script>	
+            $(document).ready(function(){
+                /* Assign a function for submit button - (doesn't needed for plugin to work) */
+                $("#exampleSubmitButton").on('click', function(){
+                    alert('Sorry....this is your work....enjoy it!!!');
+                });
 
 
-                    /* Create options array */
-                    var comboAssociateOptions = {
-                        debug: true,	
-                        associatedCombos: {	
-                            'select#selectCombo2': {
+                /* Create options array */
+                var comboAssociateOptions = {
+                    debug: true,	
+                    associatedCombos: {	
+                        'select#selectCombo2': {
 
-                                //url: 'php/ajaxBasicExample1-combo2.php', /* PHP where we get the data */
-                                chooseOption: true, /* Option to determine if the combo use an <option> tag for "CHOOSE AN OPTION" - by default is false */
-                                chooseOptionValue:'-1', /* Option to determine the value of <option> tag for "CHOOSE AN OPTION" - by default is '0' */
-
-                                beforeFunction: function (object) { /* Function to make actions before.... */
-                                        //object.empty(); ????
-                                        alert('beforeFunction selectCombo2');
-                                },
-                                afterFunction: function (object) { /* Function to make actions after.... */
-                                        alert('afterFunction selectCombo2');
-                                }
+                            url: 'ajaxBasicExample1-combo2.php', /* PHP where we get the data */
+                            chooseOption: true, /* Option to determine if the combo use an <option> tag for "CHOOSE AN OPTION" - by default is false */
+                            chooseOptionValue:'-1', /* Option to determine the value of <option> tag for "CHOOSE AN OPTION" - by default is '0' */
+                            chooseOptionText:'Choose...',
+                            onChange: function (object) { 
+                                alert('onChange: selectCombo2');
                             },
-                            'select#selectCombo3': {
+                            beforeFunction: function (object) { /* Function to make actions before.... */
+                                    //object.empty(); ????
+                                    alert('beforeFunction selectCombo2');
+                            },
+                            afterFunction: function (object) { /* Function to make actions after.... */
+                                    alert('afterFunction selectCombo2');
+                            }
+                        },
+                        'select#selectCombo3': {
 
-                                url: 'php/ajaxBasicExample1-combo3.php',
-                                chooseOption: true,
-                                chooseOptionValue: 'Choose...',
-
-                                beforeFunction: function (object) {
-                                        alert('beforeFunction selectCombo3');
-                                },
-                                afterFunction: function (object) {
-                                        alert('afterFunction selectCombo3');
-                                }
+                            url: 'ajaxBasicExample1-combo3.php',
+                            chooseOption: true,
+                            chooseOptionValue: '0',
+                            chooseOptionText:'Choose...',
+                            onChange: function (object) { 
+                                alert('onChange: selectCombo3');
+                            },
+                            beforeFunction: function (object) {
+                                    alert('beforeFunction selectCombo3');
+                            },
+                            afterFunction: function (object) {
+                                    alert('afterFunction selectCombo3');
                             }
                         }
-                    };
+                    }
+                };
 
-                    /* Call comboAssociate plugin with options array */
-                    $("select#selectCombo1").comboAssociate(comboAssociateOptions); 
-                });
-            </script>		 
+                /* Call comboAssociate plugin with options array */
+                $("select#selectCombo1").comboAssociate(comboAssociateOptions);
+
+                /*$.when( $("select#selectCombo1").comboAssociate(comboAssociateOptions)).then(function( data, textStatus, jqXHR ) {
+                    //alert('when'); 
+                });*/  
+            });
+        </script>		 
     </body>
 </html>
