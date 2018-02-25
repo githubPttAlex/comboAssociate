@@ -18,13 +18,13 @@
                 <div class="container">
                   <div class="row">
                         <div class="col-sm-8 col-md-7 py-4">
-                          <h4 class="text-white">About</h4>
-                          <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+                          <h4 class="text-white">About comboAssociate - jQuery Plugin</h4>
+                          <p class="text-muted">This plugin is useful when you need to manage single or multiple select HTML tags on your projects. See docs for more information.</p>
                         </div>
                         <div class="col-sm-4 offset-md-1 py-4">
                           <h4 class="text-white">Contact</h4>
                           <ul class="list-unstyled">
-                                <li><a href="#" class="text-white">Email me</a></li>
+                                <li><a href="mailto:alejandrodai2@gmail.com" class="text-white">Email me</a></li>
                           </ul>
                         </div>
                   </div>
@@ -47,7 +47,7 @@
           <section class="jumbotron text-center">
                 <div class="container">
                   <h1 class="jumbotron-heading">comboAssociate - jQuery Plugin</h1>
-                  <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+                  <p class="lead text-muted">This plugin is useful when you need to manage single or multiple select HTML tags on your projects. See docs for more information.</p>
                 </div>
           </section>
 
@@ -59,10 +59,10 @@
                           <div class="card mb-4 box-shadow">
                                 <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Basic Example 1" alt="Basic Example 1">
                                 <div class="card-body">
-                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                  <p class="card-text">Simple example managing a simple select HTML tag.</p>
                                   <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                          <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='examples/basic-example-1.html';" >View</button>
+                                          <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='basic-example-1.html';" >View</button>
                                         </div>
                                   </div>
                                 </div>
@@ -70,9 +70,9 @@
                         </div>
                         <div class="col-md-4">
                           <div class="card mb-4 box-shadow">
-                                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Basic Example 2" alt="Basic Example 2">
+                                <img class="card-img-top" src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Basic Example 2" alt="Basic Example 2">
                                 <div class="card-body">
-                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                  <p class="card-text">Simple example managing multiple select HTML tag.</p>
                                   <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                           <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -83,9 +83,9 @@
                         </div>
                         <div class="col-md-4">
                           <div class="card mb-4 box-shadow">
-                                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Basic Example 3" alt="Basic Example 3">
+                                <img class="card-img-top" style="margin-left: 60px;width:65%;" src="https://lh4.ggpht.com/S9BuZEq9EtXqbDcMIOV24-IXB-nRT5o27zcKicI7dU915s4xwZWkGKBzzCNfg3esAkE=w170" alt="Basic Example 3">
                                 <div class="card-body">
-                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                  <p class="card-text">Fully integrated version of this plugin with Laravel PHP Framework</p>
                                   <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                           <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
