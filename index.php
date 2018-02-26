@@ -32,7 +32,7 @@
           </div>
           <div class="navbar navbar-dark bg-dark box-shadow">
                 <div class="container d-flex justify-content-between">
-                  <a href="#" class="navbar-brand d-flex align-items-center">
+                  <a href="index.php" class="navbar-brand d-flex align-items-center">
                         <strong>comboAssociate - jQuery Plugin</strong>
                   </a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +75,7 @@
                                   <p class="card-text">Simple example managing multiple select HTML tag.</p>
                                   <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                          <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='basic-example-2.html';" >View</button>
                                         </div>
                                   </div>
                                 </div>

@@ -47,15 +47,16 @@
             }, settings);
 
             if(comboAssociateDebug){console.log(options);}
-            
+
             
             this.on('change', function() {
                 var selectedOption = $(this).val();
-
+                var requests = [];
+                var nestedFunctions = {};
+        
                 for (var key in settings.associatedCombos) {
                     console.log('key:' + key);
-                    console.log(mainObjectSelector);
-
+                    
                     var urlOptionElement = settings.associatedCombos[key].url;
                     var chooseOptionOptionElement = settings.associatedCombos[key].chooseOption;
                     var chooseOptionValueOptionElement = settings.associatedCombos[key].chooseOptionValue;
@@ -69,68 +70,70 @@
                         type: "POST",
                         url: urlOptionElement,
                         dataType: 'json',   
-                        data : dataAjax,
-                        success: function (response) {
-                            console.log(response);
-                            console.log('hacemos empty de:'+key);
-                            $(key).empty();
-                            
-                            var strOptions = '';   
-                            if(chooseOptionOptionElement){
-                                strOptions += '<option value="' + chooseOptionValueOptionElement + '" selected>' + chooseOptionTextOptionElement + '</option>';
-                            }
-                            
-                            $.each(response, function(responseKey, responseValue) {
-                                strOptions += '<option value="'+responseKey+'" >'+responseValue+'</option>';
-                            });
-                            $(key).html(strOptions);
-                        },
-                        error: function (request, status, error) {
-                            console.log(request.responseText);
-                        } 
+                        data : dataAjax
                     };
-                    comboAssociateAjaxCall(ajaxOptions);
+                    var processAjax = ca_AjaxCall(ajaxOptions); 
+                    requests.push(processAjax); 
+                    nestedFunctions.myfunction = function(element, response) {
+                        $(element).empty(); 
+                        var strOptions = '';   
+                        if(chooseOptionOptionElement){
+                            strOptions += '<option value="' + chooseOptionValueOptionElement + '" selected>' + chooseOptionTextOptionElement + '</option>';
+                        }
+                        $.each(response, function(responseKey, responseValue) {
+                            strOptions += '<option value="'+responseKey+'" >'+responseValue+'</option>';
+                        });
+                        $(element).html(strOptions);
+                    };
                     //settings.associatedCombos['select#selectCombo2'].onChange.call();
-
-
                 }
+                //console.log(nestedFunctions);
+               
+                $.when.apply($, requests).done(function(){
+                    console.log('done');
+                    console.log(arguments);
+                    console.log(arguments[0][0] + arguments[0][1] + arguments[0][2] ); 
+                    console.log(arguments[1][0] + arguments[1][1] + arguments[1][2] ); 
+   
+                    ca_ManageResponses(nestedFunctions, arguments, settings.associatedCombos);
+                    
+                    
+                    
+                    //settings.associatedCombos['select#selectCombo2'].afterFunction.call();
+     
+                }).fail(function(){
+                    console.log('fail');
+                    console.log(arguments);
+                });       
             });
-            
-            
-            /* //////////////////////////////comboAssociate Plugin//////////////////////////////////////////////////////// */
-            //GESTIONA LOS X SELECTORES RECIBIDOS
-            /*$.fn.gestionarSelectElemento = function(params) {
-                    var selectElemento = $('select#selectElemento option:selected').val();
-            };*/
-            /*function gestionarSelectElemento(){
-                //recogemos el id del elemento seleccionado (ejemplo: id de un Hito)
-                var selectElemento = $('select#selectElemento option:selected').val();
-                if(selectElemento == 0){
-                    //deshabilitamos el boton de subida
-                    $("#btnUploadFile").attr("disabled", true);
-                    $('#contenedorInputFile').css('display', 'none');
-                }else{
-                    //habilitamos el boton de subida
-                    $("#btnUploadFile").attr("disabled", false);
-                    $('#contenedorInputFile').css('display', 'block');
-                }
-                return false;
-            }*/
-            
-
             /* FINALLY - We return the object - It's useful when you need to chaining other jQuery functions before initializing the comboAssociate jQuery Plugin - See the docs for more info*/
             return this; 
         };
        
+        function ca_ManageResponses(nestedFunctions, response, associatedCombos){
+            var index= 0;
+            for (var key in associatedCombos) { 
+                console.log(key);
+                nestedFunctions.myfunction(key, response[index][0]); //.call(element, arguments);
+                index++;
+                /*var obj = settings.associatedCombos[key];
+                for (var prop in obj) {
+                    if(prop==='url'){
+                        //alert('hay url');
+                    }
+                }*/
+            }
 
+       }
        
-        function comboAssociateAjaxCall(customAjaxOptions){
-           var defaultOptions = { type: "POST", data: {}, dataType: "json", success: function(response){alert(response.message);}, error: function(xhr, ajaxOptions, thrownError){alert(thrownError);} };
+        function ca_AjaxCall(customAjaxOptions){
+           var defaultOptions = { type: "POST", data: {}, dataType: "json"};
            customAjaxOptions = $.extend(true,defaultOptions, customAjaxOptions);
            if(!customAjaxOptions.url){console.log('*****************');console.log('ERROR: FALTA URL PARA LLAMADA AJAX EN LAS OPCIONES');console.log('*****************');return false;}
-
            /* WARNING:......LARAVEL???*/ 
            //if(!customAjaxOptions.data._token){ customAjaxOptions.data._token = "{{csrf_token()}}";}
-           $.ajax(customAjaxOptions);	
+           return $.ajax(customAjaxOptions);	
         }
+        
+       
 }( jQuery ));
