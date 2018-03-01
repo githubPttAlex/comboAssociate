@@ -1,11 +1,4 @@
 <?php
-/* 
- * ajaxBasicExample1-combo2.php
- */
-/*$j=0;
-for($i=0;$i<100000000000000;$i++){
-    $j++;
-}*/
 $receivedId = $_POST['id'];
 switch ($receivedId) {
     case 1:
