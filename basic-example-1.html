@@ -44,7 +44,7 @@
               <section class="jumbotron text-center">
                     <div class="container">
                       <h1 class="jumbotron-heading">comboAssociate - jQuery Plugin <br/>Basic Example 1</h1>
-                      <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+                      <p class="lead text-muted">Simple example managing and populating an HTML combo with server data and assign it an onChange function.</p>
                     </div>
               </section>
               <div class="album py-5 bg-light">
@@ -98,16 +98,14 @@
                         chooseOption: true, /* Option to determine if the combo use an <option> tag for "CHOOSE AN OPTION" - by default is false */
                         chooseOptionValue:'-1', /* Option to determine the value of <option> tag for "CHOOSE AN OPTION" - by default is '0' */
                         chooseOptionText:'Choose...',
-                        onChange: function () { /* Function to make actions before.... */
-                                //object.empty(); ????
-                                alert('onChange');
+                        onChange: function () { /* Function to make actions at onChange.... */
+                            alert('onChange');
                         },
-                        beforeFunction: function (object) { /* Function to make actions before.... */
-                                //object.empty(); ????
-                                alert('beforeFunction');
+                        beforeFunction: function () { /* Function to make actions before.... */
+                            alert('beforeFunction');
                         },
-                        afterFunction: function (object) { /* Function to make actions after.... */
-                                alert('afterFunction');
+                        afterFunction: function () { /* Function to make actions after.... */
+                            alert('afterFunction');
                         }
                     };
 

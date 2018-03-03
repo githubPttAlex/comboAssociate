@@ -44,7 +44,8 @@
             <section class="jumbotron text-center">
                   <div class="container">
                     <h1 class="jumbotron-heading">comboAssociate - jQuery Plugin <br/>Basic Example 2</h1>
-                    <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+                    <p class="lead text-muted">Simple example managing an HTML combo and assign it another dependants combos.
+                        <br/>You can add callbacks functions to dependants combo and more.Read doc for more info</p>
                   </div>
             </section>
             <div class="album py-5 bg-light">
@@ -125,15 +126,14 @@
                             chooseOption: true, /* Option to determine if the combo use an <option> tag for "CHOOSE AN OPTION" - by default is false */
                             chooseOptionValue:'-1', /* Option to determine the value of <option> tag for "CHOOSE AN OPTION" - by default is '0' */
                             chooseOptionText:'Choose...',
-                            onChange: function (object) { 
+                            onChange: function () { 
                                 alert('onChange: selectCombo2');
                             },
-                            beforeFunction: function (object) { /* Function to make actions before.... */
-                                    //object.empty(); ????
-                                    alert('beforeFunction selectCombo2');
+                            beforeFunction: function () { /* Function to make actions before.... */  
+                                alert('beforeFunction selectCombo2');
                             },
-                            afterFunction: function (object) { /* Function to make actions after.... */
-                                    alert('afterFunction selectCombo2');
+                            afterFunction: function () { /* Function to make actions after.... */
+                                alert('afterFunction selectCombo2');
                             }
                         },
                         'select#selectCombo3': {
@@ -146,10 +146,10 @@
                                 alert('onChange: selectCombo3');
                             },
                             beforeFunction: function (object) {
-                                    alert('beforeFunction selectCombo3');
+                                alert('beforeFunction selectCombo3');
                             },
                             afterFunction: function (object) {
-                                    alert('afterFunction selectCombo3');
+                                alert('afterFunction selectCombo3');
                             }
                         }
                     }
@@ -157,10 +157,6 @@
 
                 /* Call comboAssociate plugin with options array */
                 $("select#selectCombo1").comboAssociate(comboAssociateOptions);
-
-                /*$.when( $("select#selectCombo1").comboAssociate(comboAssociateOptions)).then(function( data, textStatus, jqXHR ) {
-                    //alert('when'); 
-                });*/  
             });
         </script>		 
     </body>

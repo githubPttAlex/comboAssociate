@@ -91,7 +91,9 @@
                     }
                     //console.log(nestedFunctions);
 
-                    $.when.apply($, requests).done(function(){
+                    $.when.apply(
+                        $, requests
+                    ).done(function(){
                         console.log('done');
                         console.log(arguments);
                         console.log(arguments[0][0] + arguments[0][1] + arguments[0][2] ); 
@@ -113,89 +115,152 @@
                 
             }else{
                 
-                console.log('else'); 
-               
+                if(comboAssociateDebug){console.log('Creating comboAssociate - single mode');}
+                                
+                var selectorId = '#' + this.attr('id');
                 
-                var comboId = '#' + this.attr('id');
-                var selectedOption = $(this).val();
-                var requests = [];
-                var nestedSingleFunctions = {};
-                var urlOptionElement = settings.url;
-                var chooseOptionOptionElement = settings.chooseOption;
-                var chooseOptionValueOptionElement = settings.chooseOptionValue;
-                var chooseOptionTextOptionElement = settings.chooseOptionText;
+                var userActionsSingle = executeFunctionSingle(settings.beforeFunction, 'userBefore'),
+                chainedSingle = userActionsSingle.then(function(data) {
+                  return executeFunctionSingle(comboAssociateSingleFunction, 'executeFunction');
+                });
+                chainedSingle.done(function(data) {
+                    executeFunctionSingle(settings.afterFunction, 'userAfter');
+                });
                 
-//                alert(chooseOptionOptionElement);
-//                alert(chooseOptionValueOptionElement);
-//                alert(chooseOptionTextOptionElement);
+                /* Creating comboAssociate - single mode - BEGIN NESTED FUNCTIONS BLOCK */
+                function comboAssociateSingleFunction(){
+                    
+                    var selectedOption = $(selectorId).val();
+                    var requests = [];
+                    var nestedSingleFunctions = {};
+                    var urlOptionElement = settings.url;
+                    var chooseOptionOptionElement = settings.chooseOption;
+                    var chooseOptionValueOptionElement = settings.chooseOptionValue;
+                    var chooseOptionTextOptionElement = settings.chooseOptionText;
 
-                var dataAjax = {};
-                dataAjax.id = selectedOption;
-                //dataAjax._token = "{{csrf_token()}}";   
+                    //alert(chooseOptionOptionElement);
+                    //alert(chooseOptionValueOptionElement);
+                    //alert(chooseOptionTextOptionElement);
 
-                var ajaxOptions = {
-                    type: "POST",
-                    url: urlOptionElement,
-                    dataType: 'json',   
-                    data : dataAjax
-                };
-                var processAjax = ca_AjaxCall(ajaxOptions); 
-                requests.push(processAjax); 
-                nestedSingleFunctions.caFunctionSingle = function(element, response) {
-                    $(element).empty(); 
-                    var strOptions = '';   
-                    if(chooseOptionOptionElement){
-                        strOptions += '<option value="' + chooseOptionValueOptionElement + '" selected>' + chooseOptionTextOptionElement + '</option>';
-                    }
-                    $.each(response, function(responseKey, responseValue) {      
-                        strOptions += '<option value="'+responseKey+'" >'+responseValue+'</option>';
+                    var dataAjax = {};
+                    dataAjax.id = selectedOption;
+                    //dataAjax._token = "{{csrf_token()}}";   
+
+                    var ajaxOptions = {
+                        type: "POST",
+                        url: urlOptionElement,
+                        dataType: 'json',   
+                        data : dataAjax
+                    };
+
+                    var processAjax = ca_AjaxCall(ajaxOptions); 
+                    requests.push(processAjax); 
+
+                    nestedSingleFunctions.caFunctionSingle = function(element, response) {
+
+                        if(comboAssociateDebug){
+                            console.log('comboAssociate - taking functions on ' + element);
+                            console.log('comboAssociate - response:');
+                            console.log( response);
+                        }
+
+                        $(element).empty(); 
+                        var strOptions = '';   
+                        if(chooseOptionOptionElement){
+                            strOptions += '<option value="' + chooseOptionValueOptionElement + '" selected>' + chooseOptionTextOptionElement + '</option>';
+                        }
+                        $.each(response, function(responseKey, responseValue) {      
+                            strOptions += '<option value="'+responseKey+'" >'+responseValue+'</option>';
+                        });
+                        $(element).html(strOptions);
+                    };
+
+                    $.when.apply(
+                            $, requests
+                    ).done(function(){
+
+                        if(comboAssociateDebug){
+                            console.log('comboAssociate - Done()');
+                            console.log('comboAssociate - Done() arguments:');
+                            console.log(arguments);
+                        }
+                        ca_ManageResponses_single(nestedSingleFunctions, arguments, selectorId);
+
+                    }).fail(function(){
+
+                        if(comboAssociateDebug){
+                            console.log('comboAssociate - Fail()');
+                            console.log('comboAssociate - Fail() arguments:');
+                            console.log(arguments);
+                        }
+
                     });
-                    $(element).html(strOptions);
-                };
- 
-                $.when.apply($, requests).done(function(){
-                    console.log('done');
-                    ca_ManageResponses_single(nestedSingleFunctions, arguments, comboId);
-                    //settings.associatedCombos['select#selectCombo2'].afterFunction.call();
 
-                }).fail(function(){
-                    console.log('fail');
-                    console.log(arguments);
-                });
-                
-                this.on('change', function() {
-                    settings.onChange.call();
-                });
+                    $(selectorId).on('change', function() {
+                        if(comboAssociateDebug){
+                            console.log('comboAssociate - ' + selectorId + ' Change()');
+                            console.log(arguments);
+                        }
+                        var returnedDfd = executeFunctionSingle(settings.onChange);
+                        return returnedDfd;
+                        //if(typeof settings.onChange === "function"){
+                        //  settings.onChange.call();
+                        //}
+                    });
+                }
 
-                
             }
             
-            
+            function executeFunctionSingle(varFunction, consoleText) {  
+                if(comboAssociateDebug){
+                    console.log('comboAssociate - executeFunction:' + consoleText);
+                    console.log();
+                }
+                var dfd = $.Deferred();
+                try{
+                    if(typeof varFunction === "function"){
+                        varFunction.call();
+                        dfd.resolve(true); 
+                    }
+                }catch(error){
+                    dfd.reject(error);
+                }
+                return dfd.promise();
+            }
+            /* Creating comboAssociate - single mode - END NESTED FUNCTIONS BLOCK */
+             
+             
+             
+             
+             
             /* FINALLY - We return the object - It's useful when you need to chaining other jQuery functions before initializing the comboAssociate jQuery Plugin - See the docs for more info*/
             return this; 
         };
        
-        function ca_ManageResponses(nestedFunctions, response, associatedCombos){
-            var index= 0;
-            for (var key in associatedCombos) { 
 
-                nestedFunctions.myfunction(key, response[index][0]); //.call(element, arguments);
+        /* comboAssociate - single mode - BEGIN AUX FUNCTIONS BLOCK */
+        function ca_ManageResponses(nestedFunctions, response, associatedCombos){
+            console.log('1');
+            console.log(nestedFunctions);
+            console.log('2');
+            console.log(response);
+            console.log('3');
+            console.log(associatedCombos);
+            
+            var index= 0;
+            for (var key in associatedCombos) {
+                console.log(key + '->');
+                console.log(response[index][0]);
+                nestedFunctions.myfunction(key, response[index][0]);
                 index++;
-                /*var obj = settings.associatedCombos[key];
-                for (var prop in obj) {
-                    if(prop==='url'){
-                        //alert('hay url');
-                    }
-                }*/
             }
 
-       }
+        }
        
         function ca_ManageResponses_single(nestedFunctions, response, element){
            nestedFunctions.caFunctionSingle(element, response[0]); 
         }
-
-
+        
         function ca_AjaxCall(customAjaxOptions){
            var defaultOptions = { type: "POST", data: {}, dataType: "json"};
            customAjaxOptions = $.extend(true,defaultOptions, customAjaxOptions);
@@ -204,6 +269,5 @@
            //if(!customAjaxOptions.data._token){ customAjaxOptions.data._token = "{{csrf_token()}}";}
            return $.ajax(customAjaxOptions);	
         }
-        
-       
+         /* comboAssociate - single mode - END AUX FUNCTIONS BLOCK */
 }( jQuery ));
