@@ -7,7 +7,7 @@
            
             if(typeof options === 'undefined'){alert('Error: comboAssociate initializing error: no settings');return false;}
      
-            /* Default values to use in this plugin - don't change */
+            /* Default settings to use in this plugin - don't change */
             var settings = $.extend({
                 debug: false, 
                 data: {},

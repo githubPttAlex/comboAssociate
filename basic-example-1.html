@@ -106,7 +106,8 @@
                         chooseOptionValue:'-1', /* Option to determine the value of <option> tag for "CHOOSE AN OPTION" - by default is '0' */
                         chooseOptionText:'Choose...', /* Option to determine the text of <option> tag for "CHOOSE AN OPTION" - by default is 'Choose an option...' */
                         empty: true, /* Option to determine if you want we remove all the <option> tags before populating again with server data - by default is true */
-                        dataType: "json", /* Option to determine dataType: on ajax call - by default is 'json' */
+                        dataType: "json", /* Option to determine dataType on ajax call - by default is 'json' */
+                        type: "POST", /* Option to determine request type on ajax call - by default is 'POST' */
                         onChange: function () { /* Function to make actions at onChange.... */
                             alert('#selectCombo1 - onChange');
                             
@@ -116,11 +117,11 @@
                             data.anotherDummyValue ='anotherDummyValue';/* If you need add more parameters for your ajax call...feel free!!  */
 
                             $("select#selectCombo2").comboAssociate({
-                                //data: data, /* Option to determine the data you will send to server (ajax call parameters) */
-                                //url: 'ajaxBasicExample1-combo2.php',
-                                chooseOption: true, 
-                                chooseOptionValue:'-2', 
-                                chooseOptionText:'Another text...',
+                                data: data, /* Option to determine the data you will send to server (ajax call parameters) */
+                                url: 'ajaxBasicExample1-combo2.php',
+                                //chooseOption: true, 
+                                //chooseOptionValue:'-2', 
+                                //chooseOptionText:'Another text...',
                                 empty: false,
                                 onChange: function () { 
                                     alert('#selectCombo2 - onChange');
@@ -141,11 +142,13 @@
                         }
                     };
 
-                    /* Call comboAssociate plugin with options array */
+                    
                     //$("#selectCombo1").comboAssociate(comboAssociateOptions).css('margin-left', '-300px'); 
                     //$("#selectCombo1,#selectCombo2").comboAssociate(comboAssociateOptions).css('margin-left', '-300px'); 
                     //$("select").comboAssociate(comboAssociateOptions).css('margin-left', '-300px'); 
                     //$(".comboAssociate").comboAssociate(comboAssociateOptions); 
+                    
+                    /* Call comboAssociate plugin with options array */
                     $("#selectCombo1").comboAssociate(comboAssociateOptions);
                     
                     /* Assign a function for submit button - (doesn't needed for plugin to work) */
