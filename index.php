@@ -83,9 +83,9 @@
                         </div>
                         <div class="col-md-4">
                           <div class="card mb-4 box-shadow">
-                                <img class="card-img-top" style="margin-left: 60px;width:65%;" src="https://lh4.ggpht.com/S9BuZEq9EtXqbDcMIOV24-IXB-nRT5o27zcKicI7dU915s4xwZWkGKBzzCNfg3esAkE=w170" alt="Basic Example 3">
+                                <img class="card-img-top" style="margin-left: 60px;width:65%;" src="https://lh4.ggpht.com/S9BuZEq9EtXqbDcMIOV24-IXB-nRT5o27zcKicI7dU915s4xwZWkGKBzzCNfg3esAkE=w170" alt="Simple configuration of this plugin to integrate with Laravel PHP Framework">
                                 <div class="card-body">
-                                  <p class="card-text">Fully integrated version of this plugin with Laravel PHP Framework</p>
+                                  <p class="card-text">Simple configuration of this plugin to integrate with Laravel PHP Framework</p>
                                   <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                           <button type="button" class="btn btn-sm btn-outline-secondary">View</button>

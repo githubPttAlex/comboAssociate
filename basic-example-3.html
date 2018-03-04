@@ -5,7 +5,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta name="description" content="Basic Example - comboAssociate - jQuery Plugin">
             <meta name="author" content="comboAssociate - jQuery Plugin">
-            <title>Basic Example - comboAssociate - jQuery Plugin</title>
+            <title>Simple configuration of this plugin to integrate with Laravel PHP Framework - comboAssociate - jQuery Plugin</title>
             <!-- Bootstrap core CSS -->
             <link href="resources/bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
             <!-- Custom styles for this template -->
@@ -18,8 +18,7 @@
                     <div class="row">
                           <div class="col-sm-8 col-md-7 py-4">
                             <h4 class="text-white">About comboAssociate - jQuery Plugin</h4>
-                            <p class="text-muted">This plugin is useful when you need to manage single or multiple select HTML tags on your projects. 
-                                See <a href="doc/index.html" >docs</a> for more information.</p>
+                            <p class="text-muted">This plugin is useful when you need to manage single or multiple select HTML tags on your projects. See docs for more information.</p>
                           </div>
                           <div class="col-sm-4 offset-md-1 py-4">
                             <h4 class="text-white">Contact</h4>
@@ -44,8 +43,8 @@
             <main role="main">
               <section class="jumbotron text-center">
                     <div class="container">
-                      <h1 class="jumbotron-heading">comboAssociate - jQuery Plugin <br/>Basic Example 1</h1>
-                      <p class="lead text-muted">Simple example managing and populating an HTML combo with server data and assign it an onChange function.</p>
+                      <h1 class="jumbotron-heading">comboAssociate - jQuery Plugin <br/>Basic Example 3</h1>
+                      <p class="lead text-muted">Simple configuration of this plugin to integrate with Laravel PHP Framework.</p>
                     </div>
               </section>
               <div class="album py-5 bg-light">
@@ -55,17 +54,11 @@
                                 <form>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                          <label for="selectCombo1">First Combo</label>
-                                          <select id="selectCombo1" class="form-control comboAssociate">
+                                          <label for="selectCombo1">Soccer Teams</label>
+                                          <select class="form-control comboAssociate">
                                                 <option value="" selected>Choose...</option>
                                           </select>
-                                        </div>           
-                                        <div class="form-group col-md-12">
-                                          <label for="selectCombo2">Second Combo</label>
-                                          <select id="selectCombo2" class="form-control comboAssociate">
-                                                <option value="" >Choose...</option>
-                                          </select>
-                                        </div>   
+                                        </div>  
                                     </div> 
                                     <button id="exampleSubmitButton" type="button" class="btn btn-primary">Submit</button>
                                 </form>
@@ -98,55 +91,39 @@
             <script>	
                 $(document).ready(function(){
                     
+                    var data = {};
+                    data.id = 1;
+                    data.anotherDummyValue ='anotherDummyValue'; /* If you need add more parameters for your ajax call...feel free!!  */
+                    
+                    /* 1) ADD NEEDED PARAMETER FOR LARAVEL - csrf_token */ 
+                    data._token = "{{csrf_token()}}";
+                            
                     /* Create options array */
                     var comboAssociateOptions = {
                         debug: true, /* Option to determine if you want to show debug lines on console - by default is false */	
-                        url: 'ajaxBasicExample.php', /* PHP-URL where we get the data */
+                        
+                        /* 2) ADD NEEDED PARAMETER FOR LARAVEL - PHP-URL where we get the data */
+                        url: "{{URL::to('yourLaravelRoute')}}", 
+                        
+                        data: data, /* Option to determine the data you will send to server (ajax call parameters) */
                         chooseOption: true, /* Option to determine if the combo use an <option> tag for "CHOOSE AN OPTION" - by default is false */
                         chooseOptionValue:'-1', /* Option to determine the value of <option> tag for "CHOOSE AN OPTION" - by default is '0' */
                         chooseOptionText:'Choose...', /* Option to determine the text of <option> tag for "CHOOSE AN OPTION" - by default is 'Choose an option...' */
                         empty: true, /* Option to determine if you want we remove all the <option> tags before populating again with server data - by default is true */
-                        dataType: "json", /* Option to determine dataType: on ajax call - by default is 'json' */
                         onChange: function () { /* Function to make actions at onChange.... */
-                            alert('#selectCombo1 - onChange');
-                            
-                            var idToSend = $("select#selectCombo1 option:selected").val();
-                            var data = {};
-                            data.id = idToSend;
-                            data.anotherDummyValue ='anotherDummyValue';/* If you need add more parameters for your ajax call...feel free!!  */
-
-                            $("select#selectCombo2").comboAssociate({
-                                //data: data, /* Option to determine the data you will send to server (ajax call parameters) */
-                                //url: 'ajaxBasicExample1-combo2.php',
-                                chooseOption: true, 
-                                chooseOptionValue:'-2', 
-                                chooseOptionText:'Another text...',
-                                empty: false,
-                                onChange: function () { 
-                                    alert('#selectCombo2 - onChange');
-                                },
-                                beforeFunction: function () { 
-                                    alert('#selectCombo2 - beforeFunction:');
-                                },
-                                afterFunction: function () { 
-                                    alert('selectCombo2 - afterFunction:');
-                                }
-                            });
+                            alert('onChange');
                         },
                         beforeFunction: function () { /* Function to make actions before.... */
-                            alert('#selectCombo1 - beforeFunction');
+                            alert('beforeFunction');
                         },
                         afterFunction: function () { /* Function to make actions after.... */
-                            alert('#selectCombo1 - afterFunction');
+                            alert('afterFunction');
                         }
                     };
 
                     /* Call comboAssociate plugin with options array */
-                    //$("#selectCombo1").comboAssociate(comboAssociateOptions).css('margin-left', '-300px'); 
-                    //$("#selectCombo1,#selectCombo2").comboAssociate(comboAssociateOptions).css('margin-left', '-300px'); 
-                    //$("select").comboAssociate(comboAssociateOptions).css('margin-left', '-300px'); 
-                    //$(".comboAssociate").comboAssociate(comboAssociateOptions); 
-                    $("#selectCombo1").comboAssociate(comboAssociateOptions);
+                    $(".comboAssociate").comboAssociate(comboAssociateOptions); 
+                    
                     
                     /* Assign a function for submit button - (doesn't needed for plugin to work) */
                     $("#exampleSubmitButton").on('click', function(){
