@@ -5,19 +5,46 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta name="description" content="Basic Example - comboAssociate - jQuery Plugin">
             <meta name="author" content="comboAssociate - jQuery Plugin">
-            <title>Basic Example - comboAssociate - jQuery Plugin</title>
+            <title>Basic Example 1 - comboAssociate - jQuery Plugin</title>
             <!-- Bootstrap core CSS -->
             <link href="resources/bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
             <!-- Custom styles for this template -->
             <link href="resources/bootstrap-4.0.0/docs/4.0/examples/album/album.css" rel="stylesheet">
             <link href="resources/css/font-awesome.min.css" rel="stylesheet">
+            <!-- CSS ONLY FOR THIS EXAMPLES -->
+            <style>
+                .bg-dark {background-color: #dee2e6 !important;}
+                .navbar-dark .navbar-brand {color: #6d6161;}
+                .h4, h4 {font-size: 20px;}
+                .alert-primary {
+                    color: #6d6161;
+                    background-color: #dee2e6 !important;
+                    border-color: #dee2e6 !important;
+                }
+                .list-group-item.active {
+                    z-index: 2;
+                    color: #6d6161;
+                    background-color: #dee2e6;
+                    border-color: #dee2e6;
+                    font-weight: 700;
+                }
+                .syntax{    
+                    background: #F0F0F0;
+                    padding: 32px;
+                }
+                .font16{font-size: 16px;}
+                div#fillDivActions{margin-top: 10px;}
+                a{color: #2f9023;}
+            </style>
+            <!-- CSS ONLY FOR THIS EXAMPLES -->
     </head>
+    
     <body>
         <header>
             
             <div class="navbar navbar-dark bg-dark box-shadow">
                   <div class="container d-flex justify-content-between">
-                    <a href="index.php" class="navbar-brand d-flex align-items-center">
+                    <a href="doc/index.html" class="navbar-brand d-flex align-items-center">
                           <strong>comboAssociate - jQuery Plugin</strong>
                     </a>
                     
@@ -28,30 +55,31 @@
               <section class="jumbotron text-center">
                     <div class="container">
                       <h1 class="jumbotron-heading">comboAssociate - jQuery Plugin <br/>Basic Example 1</h1>
-                      <p class="lead text-muted">Simple example managing and populating an HTML combo with server data and assign it an onChange function.</p>
+                      <p class="lead text-muted">
+                        Simple example managing and populating an HTML combo with server data and assign it an onChange function.
+                        Read <a href="doc/index.html" target="_blank">doc</a> for more info.</p>
                     </div>
               </section>
               <div class="album py-5 bg-light">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12">   
+                                <div id="joke" class="alert alert-info" role="alert" style="display: none;">Sorry....this is your work....enjoy it!!!</div>     
                                 <form>
                                     <div class="form-row">
+                                        
                                         <div class="form-group col-md-12">
                                           <label for="selectCombo1">First Combo</label>
                                           <select id="selectCombo1" class="form-control comboAssociate">
                                                 <option value="" selected>Choose...</option>
                                           </select>
-                                        </div>           
-                                        <div class="form-group col-md-12">
-                                          <label for="selectCombo2">Second Combo</label>
-                                          <select id="selectCombo2" class="form-control comboAssociate">
-                                                <option value="" >Choose...</option>
-                                          </select>
-                                        </div>   
+                                        </div> 
+  
                                     </div> 
                                     <button id="exampleSubmitButton" type="button" class="btn btn-primary">Submit</button>
                                 </form>
+ 
+                                <div id="fillDivActions"><hr></div>  
                             </div>	
                         </div>
                     </div>
@@ -64,7 +92,7 @@
                     </p>
                     <p>comboAssociate - jQuery Plugin</p>
                     <p>The plugin needs jQuery to work. Visit jQuery website - <a target="_blank" href="https://jquery.com/">jQuery</a>.</p>
-                    <p>The plugin doesnt needs bootstrap to work. We only use Bootstrap (version 4.0.0) for docs and examples - <a target="_blank" href="https://getbootstrap.com/">Visit Bootstrap website</a> .</p>
+                    <p>The plugin doesnt needs bootstrap to work. We only use Bootstrap (version 4.0.0) for <a href="doc/index.html" target="_blank">doc</a> and examples - <a target="_blank" href="https://getbootstrap.com/">Visit Bootstrap website</a> .</p>
               </div>
             </footer>
             <!-- Bootstrap core JavaScript
@@ -91,37 +119,19 @@
                         empty: true, /* Option to determine if you want we remove all the <option> tags before populating again with server data - by default is true */
                         dataType: "json", /* Option to determine dataType on ajax call - by default is 'json' */
                         type: "POST", /* Option to determine request type on ajax call - by default is 'POST' */
-                        onChange: function () { /* Function to make actions at onChange.... */
-                            alert('#selectCombo1 - onChange');
+                        onChange: function () { /* Function to make actions at onChange.... */   
+                            fillDivActions('#selectCombo1 - onChange', 'success');
                             
                             var idToSend = $("select#selectCombo1 option:selected").val();
                             var data = {};
                             data.id = idToSend;
-                            data.anotherDummyValue ='anotherDummyValue';/* If you need add more parameters for your ajax call...feel free!!  */
-
-                            $("select#selectCombo2").comboAssociate({
-                                data: data, /* Option to determine the data you will send to server (ajax call parameters) */
-                                url: 'ajaxBasicExample1-combo2.php',
-                                //chooseOption: true, 
-                                //chooseOptionValue:'-2', 
-                                //chooseOptionText:'Another text...',
-                                empty: false,
-                                onChange: function () { 
-                                    alert('#selectCombo2 - onChange');
-                                },
-                                beforeFunction: function () { 
-                                    alert('#selectCombo2 - beforeFunction:');
-                                },
-                                afterFunction: function () { 
-                                    alert('selectCombo2 - afterFunction:');
-                                }
-                            });
+                            data.anotherDummyValue ='anotherDummyValue';/* If you need add more parameters for your ajax call...feel free!!  */  
                         },
-                        beforeFunction: function () { /* Function to make actions before.... */
-                            alert('#selectCombo1 - beforeFunction');
+                        beforeFunction: function () { /* Function to make actions before.... */       
+                            fillDivActions('#selectCombo1 - beforeFunction', 'success');
                         },
                         afterFunction: function () { /* Function to make actions after.... */
-                            alert('#selectCombo1 - afterFunction');
+                            fillDivActions('#selectCombo1 - afterFunction', 'success');
                         }
                     };
 
@@ -135,10 +145,29 @@
                     $("#selectCombo1").comboAssociate(comboAssociateOptions);
                     
                     /* Assign a function for submit button - (doesn't needed for plugin to work) */
-                    $("#exampleSubmitButton").on('click', function(){
-                        alert('Sorry....this is your work....enjoy it!!!');
+                    $("#exampleSubmitButton").on('click', function(){      
+                       showAndHideJoke();
                     });
                 });
+                
+                
+                /* FUNCTIONS ONLY FOR THIS EXAMPLES */
+                function fillDivActions(text, alertClassName){          
+                    var fillDivActions = $('#fillDivActions');      
+                    var htmlCode = '<div class="alert alert-'+alertClassName+'" role="alert">'+text+'</div>';
+                    var contentDiv = fillDivActions.html();
+                    fillDivActions.html(contentDiv + htmlCode);      
+                    return true;  
+                }
+                function showAndHideJoke(){
+                    var joke = $("#joke");
+                    joke.css('display', 'block');
+                    joke.delay(1000).slideUp(1000, function() {
+                        joke.css('display', 'none');
+                    });  
+                    return true;  
+                }
+                /* FUNCTIONS ONLY FOR THIS EXAMPLES */
             </script>		 
     </body>
 </html>
