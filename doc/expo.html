@@ -35,8 +35,48 @@
             a{color: #2f9023;}
             .text-muted {color: #90e61f !important;background-color: #074c90;}
             footer p {margin-bottom: .25rem;font-weight: bold;}
-            pre {margin-bottom: -24px;}
-            p { margin-top: 0;margin-bottom: -9px;}
+            p { margin-top: 0;}
+            @media print {
+                .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+                  float: left;
+                }
+                .col-sm-12 {
+                  width: 100%;
+                }
+                .col-sm-11 {
+                  width: 91.66666666666666%;
+                }
+                .col-sm-10 {
+                  width: 83.33333333333334%;
+                }
+                .col-sm-9 {
+                  width: 75%;
+                }
+                .col-sm-8 {
+                  width: 66.66666666666666%;
+                }
+                .col-sm-7 {
+                  width: 58.333333333333336%;
+                }
+                .col-sm-6 {
+                  width: 50%;
+                }
+                .col-sm-5 {
+                  width: 41.66666666666667%;
+                }
+                .col-sm-4 {
+                  width: 33.33333333333333%;
+                 }
+                 .col-sm-3 {
+                   width: 25%;
+                 }
+                 .col-sm-2 {
+                   width: 16.666666666666664%;
+                 }
+                 .col-sm-1 {
+                  width: 8.333333333333332%;
+                 }
+            }
         </style>
     </head>
     <body>
@@ -87,8 +127,60 @@
                         </div>  
                     </div>
                 </div>
+                
+                
+            <div class="col-sm-6">
+                <div class="tab-content" id="nav-tabContent">
+                    <hr>
+                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                        <div class="alert alert-primary grey" role="alert">
+                           <h4> <i class="fa fa-paperclip" aria-hidden="true"></i> JS EN BLADE.PHP</h4>
+                        </div>
+                        <p>Todo empieza con un botón, en este caso. Establecemos con <strong>jQuery</strong> el funcionamiento del botón:</p>
+                        <br>
+                        <p>
+                            a) Realizar llamada <strong>AJAX</strong> al controlador <strong>PHP</strong>, usando la <strong>"Route"</strong> que vimos anteriormente.
+                            <br>
+                            b) Recoger la respuesta y actuar en consecuencia, es decir: lanzar la notificación si todo ha ido bien, o mostrar un mensaje de error para el usuario.
+                            <br>
+                            b) Recoger la respuesta de la notificación enviada, o mostrar un mensaje de error de notificación para el usuario.
+                        </p>
+                        <pre>
+                            <code class="js hljs">  	
+    $("#updateDescription").click(function(){
+        var data = {};
+        data.columnId = 'DESCRIPTION,DEVIATION_MOTIVE';
+        data.columnValue = $("#DESCRIPTION").val() +'|~|'+$("#DEVIATION_MOTIVE").val();
+        data.deliveryPlanId = $("#deliveryPlanId").val();
+        data.deliveryPlanTypeDescription = $("#deliveryPlanTypeDescription").val();
+
+        var options = {
+            url: "{{URL::to('solinfra/updatePE')}}",
+            type: "POST",
+            data: data,
+            dataType: "json",
+            success: function(response){
+                if (response.success){
+
+                    if(typeof response.notificationIds !== 'undefined'){
+                        var opModal = {};
+                        opModal.onHidden = function(){
+
+                        };    
+                        toastr.success("Regerenando contenido de la entrega...espere por favor", null, opModal);
+                    }
+                }
+        };
+        ajaxCall(options);
+    });
+                            </code>
+                        </pre>
+                    </div> 
+                </div>
+            </div>
+          
    
-            <div class="col-sm-6">   
+            <div class="col-sm-12">   
                 <div class="tab-content" id="nav-tabContent">
                     <hr>
                     
@@ -157,60 +249,11 @@
                 </div>
             </div>
    
-            <div class="col-sm-6">
-                <div class="tab-content" id="nav-tabContent">
-                    <hr>
-                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                        <div class="alert alert-primary grey" role="alert">
-                           <h4> <i class="fa fa-paperclip" aria-hidden="true"></i> JS EN BLADE.PHP</h4>
-                        </div>
-                        <p>Todo empieza con un botón, en este caso. Establecemos con <strong>jQuery</strong> el funcionamiento del botón:</p>
-                        <br>
-                        <p>
-                            a) Realizar llamada <strong>AJAX</strong> al controlador <strong>PHP</strong>, usando la <strong>"Route"</strong> que vimos anteriormente.
-                            <br>
-                            b) Recoger la respuesta y actuar en consecuencia, es decir: lanzar la notificación si todo ha ido bien, o mostrar un mensaje de error para el usuario.
-                            <br>
-                            b) Recoger la respuesta de la notificación enviada, o mostrar un mensaje de error de notificación para el usuario.
-                        </p>
-                        <pre>
-                            <code class="js hljs">  	
-    $("#updateDescription").click(function(){
-        var data = {};
-        data.columnId = 'DESCRIPTION,DEVIATION_MOTIVE';
-        data.columnValue = $("#DESCRIPTION").val() +'|~|'+$("#DEVIATION_MOTIVE").val();
-        data.deliveryPlanId = $("#deliveryPlanId").val();
-        data.deliveryPlanTypeDescription = $("#deliveryPlanTypeDescription").val();
-
-        var options = {
-            url: "{{URL::to('solinfra/updatePE')}}",
-            type: "POST",
-            data: data,
-            dataType: "json",
-            success: function(response){
-                if (response.success){
-
-                    if(typeof response.notificationIds !== 'undefined'){
-                        var opModal = {};
-                        opModal.onHidden = function(){
-
-                        };    
-                        toastr.success("Regerenando contenido de la entrega...espere por favor", null, opModal);
-                    }
-                }
-        };
-        ajaxCall(options);
-    });
-                            </code>
-                        </pre>
-                    </div> 
-                </div>
-            </div>
+      
                 
                 
                 
-                
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 
                 
                 <div class="tab-content" id="nav-tabContent">
