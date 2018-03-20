@@ -1,4 +1,7 @@
 <?php
+/* 
+ * comboAssociate - ajaxBasicExample1-combo2.php
+ */
 $receivedId = $_POST['id'];
 switch ($receivedId) {
     case 1:
