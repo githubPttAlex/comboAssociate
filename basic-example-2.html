@@ -112,7 +112,7 @@
             <script src="resources/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
             <script src="resources/bootstrap-4.0.0/assets/js/vendor/holder.min.js"></script>
             <!-- including comboAssociate - jQuery Plugin -->
-            <script src="resources/js/jquery-comboAssociate-v1-0.min.js"></script>
+            <script src="resources/js/jquery-comboAssociate-v1-0.js"></script>
             <!-- using comboAssociate - jQuery Plugin -->
             <script>	
                 $(document).ready(function(){
@@ -127,6 +127,7 @@
                         empty: true, /* Option to determine if you want we remove all the <option> tags before populating again with server data - by default is true */
                         dataType: "json", /* Option to determine dataType on ajax call - by default is 'json' */
                         type: "POST", /* Option to determine request type on ajax call - by default is 'POST' */
+                        class: "dummy-class",  /* Option to determine element CSS classes */   
                         onChange: function () { /* Function to make actions at onChange.... */
                             
                             fillDivActions('#selectCombo1 - onChange', 'success');
@@ -143,6 +144,7 @@
                                 chooseOptionValue:'-2', 
                                 chooseOptionText:'Another text...',
                                 //empty: false,
+                                class: "dummy-class",  /* Option to determine element CSS classes */   
                                 onChange: function () { 
                                     fillDivActions('#selectCombo2 - onChange', 'info');
                                 },

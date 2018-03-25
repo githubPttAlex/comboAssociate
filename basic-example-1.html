@@ -104,7 +104,7 @@
             <script src="resources/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
             <script src="resources/bootstrap-4.0.0/assets/js/vendor/holder.min.js"></script>
             <!-- including comboAssociate - jQuery Plugin -->
-            <script src="resources/js/jquery-comboAssociate-v1-0.min.js"></script>
+            <script src="resources/js/jquery-comboAssociate-v1-0.js"></script>
             <!-- using comboAssociate - jQuery Plugin -->
             <script>	
                 $(document).ready(function(){
@@ -118,8 +118,11 @@
                         chooseOptionText:'Choose...', /* Option to determine the text of <option> tag for "CHOOSE AN OPTION" - by default is 'Choose an option...' */
                         empty: true, /* Option to determine if you want we remove all the <option> tags before populating again with server data - by default is true */
                         dataType: "json", /* Option to determine dataType on ajax call - by default is 'json' */
-                        type: "POST", /* Option to determine request type on ajax call - by default is 'POST' */
-                        onChange: function () { /* Function to make actions at onChange.... */   
+                        type: "POST", /* Option to determine request type on ajax call - by default is 'POST' */  
+                        class: "dummy-class",  /* Option to determine element CSS classes */   
+                        onChange: function () { /* Function to make actions at onChange.... */ 
+                            
+                            /* FUNCTION fillDivActions: ONLY FOR THIS EXAMPLES */
                             fillDivActions('#selectCombo1 - onChange', 'success');
                             
                             var idToSend = $("select#selectCombo1 option:selected").val();
@@ -127,10 +130,14 @@
                             data.id = idToSend;
                             data.anotherDummyValue ='anotherDummyValue';/* If you need add more parameters for your ajax call...feel free!!  */  
                         },
-                        beforeFunction: function () { /* Function to make actions before.... */       
+                        beforeFunction: function () { /* Function to make actions before.... */   
+                    
+                            /* FUNCTION fillDivActions: ONLY FOR THIS EXAMPLES */
                             fillDivActions('#selectCombo1 - beforeFunction', 'success');
                         },
                         afterFunction: function () { /* Function to make actions after.... */
+                            
+                            /* FUNCTION fillDivActions: ONLY FOR THIS EXAMPLES */
                             fillDivActions('#selectCombo1 - afterFunction', 'success');
                         }
                     };

@@ -76,6 +76,7 @@
                  .col-sm-1 {
                   width: 8.333333333333332%;
                  }
+                 .fa-arrow-circle-up{display: none;}
             }
         </style>
     </head>
@@ -113,7 +114,7 @@
                              A continuación mostramos un ejemplo de <strong>"Route"</strong> en Laravel/GPI:</p>
 
                             <pre>
-                                <code class="php hljs">  	
+                                <code class="js hljs">  	
         Route::delete('deletePE',[
             'middleware' => 'manage_roles',
             'functionality' => 'deleteDeliveryPlan',
@@ -147,32 +148,86 @@
                         </p>
                         <pre>
                             <code class="js hljs">  	
-    $("#updateDescription").click(function(){
-        var data = {};
-        data.columnId = 'DESCRIPTION,DEVIATION_MOTIVE';
-        data.columnValue = $("#DESCRIPTION").val() +'|~|'+$("#DEVIATION_MOTIVE").val();
-        data.deliveryPlanId = $("#deliveryPlanId").val();
-        data.deliveryPlanTypeDescription = $("#deliveryPlanTypeDescription").val();
-
-        var options = {
-            url: "{{URL::to('solinfra/updatePE')}}",
-            type: "POST",
-            data: data,
-            dataType: "json",
-            success: function(response){
-                if (response.success){
-
-                    if(typeof response.notificationIds !== 'undefined'){
-                        var opModal = {};
-                        opModal.onHidden = function(){
-
-                        };    
-                        toastr.success("Regerenando contenido de la entrega...espere por favor", null, opModal);
+    $(".deleteDeliveryPlan").click(function () {
+        
+        
+        var idPE = $(this).attr('idPE');
+        var idSolinfra = $(this).attr('idSolinfra');
+        
+        var op = {};
+        op.onHidden = function () {
+            location.reload();
+        };
+        
+        var opModal = {};
+        opModal.ok = function () {
+            $.ajax({
+                type: "delete",
+                url: "{{URL::to('deletePE')}}",
+                data: {
+                    deliveryPlanId: idPE,
+                    solinfraId: idSolinfra,
+                    _token: "{{ csrf_token() }}"
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.success) {
+                        var opNotif = {};
+                        opNotif.onHidden = function () {
+                            var idNotif = response.notificationId;
+                            notifyWS(idNotif);
+                        };
+                        toastr.success(response.message, null, opNotif);
+                    }else{
+                        toastr.error(response.message, null, op);
                     }
                 }
+            });
         };
-        ajaxCall(options);
+        opModal.cancel = function () {
+            window.location.reload();
+        };
+        toastr.warning_modal("Está seguro que desea eliminar el Plan de Entrega", "¿Borrar el Plan de Entrega?", opModal);
     });
+                            </code>
+                        </pre>
+                       
+                        <p>Función <strong>JS</strong> que enviará la notificación:</p>
+                        <pre>
+                            <code class="js hljs">  	             
+    function notifyWS(idNotif) {
+        var opModal = {};
+        opModal.ok = function () {
+
+            var op = {};
+            op.onHidden = function () {
+                window.location.reload();
+            };
+
+            var dataAjax = {};
+            dataAjax.notificationId = idNotif;
+            dataAjax._token = "{{csrf_token()}}";
+ 
+            var optionsAjax = {
+                url: "{{URL::to('notifications')}}",
+                type: "POST",
+                data: dataAjax,
+                dataType: "json",
+                success: function (response) {
+                    if (response.success) {
+                        toastr.success(response.message, null, op);
+                    }else{ 
+                        toastr.error(response.message, null, op);
+                    }
+                }
+            };
+            ajaxCall(optionsAjax);
+        };
+        opModal.cancel = function () {
+            window.location.reload();
+        };
+        toastr.warning_modal("Desea notificar la acción ahora o más adelante", "¿Notificar acción?", opModal);
+    }
                             </code>
                         </pre>
                     </div> 
@@ -194,6 +249,10 @@
                     
                         <pre>
                             <code class="php hljs">  	
+    /**
+    * Eliminar un Plan de Entrega.
+    * Se recibe el ID del PE a borrar
+    */
     public function deletePE() {
         .......
         
@@ -212,7 +271,6 @@
             $message = 'Ocurrio un errror interno';
             $success = false;
         }
-
         print_r(json_encode(["success" => $success,"message" => $message, "notificationId" => $hist_call_ws]));
     }
                             </code>
@@ -224,12 +282,10 @@
      
                         <pre>
                             <code class="php hljs">                    
-    public function notificationsById($notificationID){
-        
+    public function notificationsById($notificationID){     
         if(empty($notificationID)){
             return json_encode(array("success" => false, "message" => "ERROR: Código de notificación no enviado"));
-        } 
-                        
+        }                    
         $notificationDetail = self::getDetailNotification($notificationID);
         return json_encode(self::sendCurl($notificationID,$notificationDetail));  
     }  
@@ -240,22 +296,23 @@
                         </p>
   
                         <pre>
-                            <code class="curl hljs">  	
-    curl -H "Content-Type: application/json" -d '{ "api_user": "username"}' https://api.example.com/send.json
+                            <code class="js hljs">  	
+    curl -H "Content-Type: application/json" -X POST -d '{  
+        "issue":{  
+            "key":"SOLINFRA-29XX"
+        },
+        "usuario":{  
+            "name":"Usuario Responsable WPM"
+        }
+    }' http://URL_JIRA_DES/rest/operaciones/borrarissue
                             </code>
                         </pre>
 
                     </div>
                 </div>
             </div>
-   
-      
-                
-                
-                
-            <div class="col-sm-12">
-                
-                
+  
+            <div class="col-sm-12">     
                 <div class="tab-content" id="nav-tabContent">
                     <hr>
                     <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
@@ -266,27 +323,36 @@
                         <p>Ejemplo del <strong>JSON</strong> enviado:</p> 
                         <pre>
                             <code class="json hljs">  	
-    {
-        "SortAs": "SGML",
-        "GlossTerm": "Standard Generalized Markup Language",
-        "Acronym": "SGML",
-        "Abbrev": "ISO 8879:1986"
-    }
+    {  
+        "issue":{  
+            "key":"SOLINFRA-29XX"
+        },
+        "usuario":{  
+            "name":"Usuario Responsable WPM"
+        }
+     }
                             </code>
                         </pre>
                         
-                         <p>Ejemplo del <strong>JSON</strong> recibido:</p>
-                       <pre>
+                        <p>Ejemplo del <strong>JSON</strong> recibido:</p>
+                        <pre>
                             <code class="json hljs">  	
     {
-        "SortAs": "SGML",
-        "GlossTerm": "Standard Generalized Markup Language",
-        "Acronym": "SGML",
-        "Abbrev": "ISO 8879:1986"
+        "result":"OK",
+        "message":"Issue deleted"
     }
                             </code>
                         </pre>
-
+                         
+                         
+                        <p>Ejemplo de posibles respuestas:</p>
+                       <pre>
+                            <code class="json hljs">  	     
+    {"result": "ERROR", "message": "No existe ninguna issue con la clave "}             
+    {"result": "ERROR", "message": "Invalid JSON"}  
+                            </code>
+                        </pre>
+   
                     </div>  
                 </div>
             </div>  
